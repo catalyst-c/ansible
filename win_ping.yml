@@ -1,0 +1,12 @@
+---
+#
+# win_ping.yml
+#
+
+- name: win_ping
+  hosts: hoge
+  gather_fact: false
+  
+  tasks:
+    - name: win_ping
+      win_ping:
