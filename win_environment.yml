@@ -1,0 +1,20 @@
+---
+#
+# win_environment.yml
+#
+
+- name: win_environment
+  hosts: hoge
+  vars:
+    adddir: C:\test
+    # マジック変数内の'\'が'\\'と表示されてしまう
+    # 本当はreplaceしたいけど・・・
+    searchdir: C:\\test 
+  tasks:
+    - name: win_environment
+      win_environment:
+        state: present
+        name: Path
+        value: "{{ ansible_env.Path }};{{ adddir }}"
+        level: machine
+      when: ansible_env.Path.find('{{ searchdir }}') == -1
